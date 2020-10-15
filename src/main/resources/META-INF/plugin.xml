@@ -1,0 +1,19 @@
+<idea-plugin>
+  <id>catviewer</id>
+  <name>CatViewer</name>
+  <version>1.0</version>
+
+  <description><![CDATA[
+    Your employee track every minute spent in browser? Use CatViewer in your IDE, and browse funny cats along you code!
+  ]]></description>
+
+  <idea-version since-build="192.5118"/>
+
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <toolWindow id="CatViewer" anchor="right" factoryClass="com.catviewer.WindowFactory"/>
+    <projectService id="CatViewerWindowService" serviceImplementation="com.catviewer.CatViewerWindowService"/>
+  </extensions>
+
+</idea-plugin>

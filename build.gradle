@@ -5,7 +5,7 @@ buildscript {
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.6.4"
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.6.5"
         classpath "cz.alenkacz:gradle-scalafmt:1.13.0"
     }
 }
@@ -24,7 +24,7 @@ apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'scalafmt'
 
 ext {
-    scalaVersion = "2.13.1"
+    scalaVersion = "2.13.3"
 }
 
 sourceSets {
@@ -37,5 +37,5 @@ dependencies {
     implementation  group: 'org.scala-lang',    name: 'scala-reflect',  version: scalaVersion
 }
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 8
+targetCompatibility = 8

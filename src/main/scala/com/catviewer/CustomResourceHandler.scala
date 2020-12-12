@@ -51,13 +51,13 @@ class CustomResourceHandler extends CefResourceHandler {
 }
 
 sealed trait ResourceHandlerState {
-   def getResponseHeaders(
+  def getResponseHeaders(
       cefResponse: CefResponse,
       responseLength: IntRef,
       redirectUrl: StringRef
   ): Unit
 
-   def readResponse(
+  def readResponse(
       dataOut: Array[Byte],
       designedBytesToRead: Int,
       bytesRead: IntRef,
@@ -66,7 +66,9 @@ sealed trait ResourceHandlerState {
 
   def close(): Unit = {}
 }
-case class OpenedConnection(connection: JarURLConnection) extends ResourceHandlerState {
+
+case class OpenedConnection(connection: JarURLConnection)
+    extends ResourceHandlerState {
   private lazy val inputStream: InputStream = connection.getInputStream
   override def getResponseHeaders(
       cefResponse: CefResponse,

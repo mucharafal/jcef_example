@@ -1,5 +1,5 @@
 # CatViewer
-Example of creation plugin which use JCEF for IntelliJ. Is part of blog post.
+Example of creation plugin which use JCEF for IntelliJ. [Is part of blog post](https://medium.com/virtuslab/creating-intellij-plugin-with-webview-3b27c3f87aea).
 
 ## Build
 You need JDK- I have tested with 15.

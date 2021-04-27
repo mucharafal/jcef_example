@@ -6,6 +6,7 @@ import org.cef.callback.CefCallback
 import org.cef.handler.{CefLoadHandler, CefResourceHandler}
 import org.cef.misc.{IntRef, StringRef}
 import org.cef.network.{CefRequest, CefResponse}
+import java.net.URLConnection
 
 class CustomResourceHandler extends CefResourceHandler {
   private var state: ResourceHandlerState = ClosedConnection
@@ -19,7 +20,7 @@ class CustomResourceHandler extends CefResourceHandler {
         val pathToResource = processedUrl.replace("http://myapp", "webview/")
         val newUrl = getClass.getClassLoader.getResource(pathToResource)
         state = OpenedConnection(
-          newUrl.openConnection().asInstanceOf[JarURLConnection]
+          newUrl.openConnection()
         )
         cefCallback.Continue()
         true
@@ -67,7 +68,7 @@ sealed trait ResourceHandlerState {
   def close(): Unit = {}
 }
 
-case class OpenedConnection(connection: JarURLConnection)
+case class OpenedConnection(connection: URLConnection)
     extends ResourceHandlerState {
   private lazy val inputStream: InputStream = connection.getInputStream
   override def getResponseHeaders(
@@ -78,10 +79,14 @@ case class OpenedConnection(connection: JarURLConnection)
     try {
       val url = connection.getURL.toString
       url match {
-        case x if x.contains("css") => cefResponse.setMimeType("text/css")
-        case x if x.contains("js") =>
+        case x if x.contains(".css") => cefResponse.setMimeType("text/css")
+        case x if x.contains(".js") =>
           cefResponse.setMimeType("text/javascript")
-        case _ => cefResponse.setMimeType(connection.getContentType)
+        case x if x.contains(".html") => cefResponse.setMimeType("text/html")
+        case _ =>
+          cefResponse.setMimeType(
+            connection.getContentType
+          ) // since 2021.1 all mime type must be set here, by hand
       }
       responseLength.set(inputStream.available())
       cefResponse.setStatus(200)

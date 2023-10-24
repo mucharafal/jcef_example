@@ -4,10 +4,10 @@
   <version>1.0</version>
 
   <description><![CDATA[
-    Your employee track every minute spent in browser? Use CatViewer in your IDE, and browse funny cats along you code!
+    Your employer track every minute spent in browser? Use CatViewer in your IDE, and browse funny cats along you code!
   ]]></description>
 
-  <idea-version since-build="192.5118"/>
+  <idea-version since-build="201.6668.113"/>
 
   <depends>com.intellij.modules.platform</depends>
 
